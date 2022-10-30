@@ -20,6 +20,8 @@ import (
 var (
 	SERVER_PORT    = os.Getenv("PORT")
 	SURREALDB_URL  = os.Getenv("SURREALDB_URL")
+	SURREALDB_NS   = os.Getenv("SURREALDB_NS")
+	SURREALDB_DB   = os.Getenv("SURREALDB_DB")
 	SURREALDB_USER = os.Getenv("SURREALDB_USER")
 	SURREALDB_PASS = os.Getenv("SURREALDB_PASS")
 )
@@ -36,7 +38,7 @@ func main() {
 
 	server := grpc.NewServer()
 
-	reflection.Register(server) // Failed to list services: server does not support the reflection API
+	reflection.Register(server)
 	bufbuild.RegisterBookServiceServer(server, svc)
 
 	lis, err := net.Listen("tcp", ":"+SERVER_PORT)
@@ -63,7 +65,6 @@ func databaseConnection() (*surrealdb.DB, error) {
 		return nil, err
 	}
 
-	// specify Namespace and Database
-	_, err = db.Use("ns", "books")
+	_, err = db.Use(SURREALDB_NS, SURREALDB_DB)
 	return db, err
 }

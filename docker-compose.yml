@@ -6,6 +6,8 @@ services:
     environment:
       - PORT=50051
       - SURREALDB_URL=ws://surrealdb:8000/rpc
+      - SURREALDB_NS=ns
+      - SURREALDB_DB=books
       - SURREALDB_USER=root
       - SURREALDB_PASS=root
     ports:

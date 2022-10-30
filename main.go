@@ -9,7 +9,7 @@ import (
 	"github.com/tk42/grpc-surrealdb-template/api/routes"
 	"github.com/tk42/grpc-surrealdb-template/pkg/book"
 
-	bufbuild "github.com/tk42/grpc-surrealdb-template/gen/proto/golang/github.com/tk42/grpc-surrealdb-template"
+	bufbuild "github.com/tk42/grpc-surrealdb-template/gen/golang/github.com/tk42/grpc-surrealdb-template"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

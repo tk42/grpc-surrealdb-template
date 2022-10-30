@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/tk42/grpc-surrealdb-template/api/presenter"
-	bufbuild "github.com/tk42/grpc-surrealdb-template/gen/proto/golang/github.com/tk42/grpc-surrealdb-template"
+	bufbuild "github.com/tk42/grpc-surrealdb-template/gen/golang/github.com/tk42/grpc-surrealdb-template"
 	"github.com/tk42/grpc-surrealdb-template/pkg/book"
 	"github.com/tk42/grpc-surrealdb-template/pkg/entities"
 )

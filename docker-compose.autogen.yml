@@ -1,0 +1,8 @@
+version: '3'
+services:
+  buf:
+    image: ghcr.io/tk42/bufbuild
+    volumes:
+      - ".:/workspace"
+    working_dir: "/workspace"
+    command: ["generate", "proto"]

@@ -1,0 +1,38 @@
+services:
+  server:
+    image: golang:latest
+    volumes:
+      - .:/home
+    environment:
+      - PORT=50051
+      - SURREALDB_URL=ws://surrealdb:8000/rpc
+      - SURREALDB_USER=root
+      - SURREALDB_PASS=root
+    ports:
+      - "50051:50051"
+    working_dir: /home
+    command: "go run main.go"
+    depends_on:
+      - surrealdb
+
+  grpcui:
+    image: 'wongnai/grpcui:latest'
+    environment:
+      - GRPCUI_SERVER=server:50051
+      - GRPCUI_PORT=8080
+    ports:
+      - 8080:8080
+    volumes:
+      - ./tool:/home
+    command: ["sh", "-c", "/home/wait-for-it.sh server:50051 -- /usr/local/scripts/start.sh"]
+    depends_on:
+      - server
+      - surrealdb
+
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    ports:
+      - "8000:8000"
+    command: "start --user root --pass root file://database.db"
+    volumes:
+      - ./database.db:/database.db

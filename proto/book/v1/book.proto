@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package book.v1;
+
+option go_package = "github.com/tk42/grpc-surrealdb-template;bookv1";
+
+import "google/type/datetime.proto";
+
+message Book {
+    string id = 1;
+    string title = 2;
+    string author = 3;
+    google.type.DateTime created_at = 4;
+    google.type.DateTime updated_at = 5;
+}
+
+message GetBooksRequest {
+}
+
+message GetBooksResponse {
+    repeated Book books = 1;
+}
+
+message AddBookRequest {
+    string title = 1;
+    string author = 2;
+}
+
+message AddBookResponse {
+    Book book = 1;
+}
+
+message UpdateBookRequest {
+    string id = 1;
+    optional string title = 2;
+    optional string author = 3;
+}
+
+message UpdateBookResponse {
+    Book book = 1;
+}
+
+message DeleteBookRequest {
+    string id = 1;
+}
+
+message DeleteBookResponse {
+}
+
+service BookService {
+    rpc GetBooks(GetBooksRequest) returns (GetBooksResponse) {}
+    rpc AddBook(AddBookRequest) returns (AddBookResponse) {}
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {}
+    rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {}
+}

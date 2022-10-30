@@ -10,3 +10,7 @@ plugins:
     out: gen/python
   - remote: buf.build/grpc/plugins/python
     out: gen/python
+  - name: js
+    out: gen/js
+  - remote: buf.build/grpc/plugins/node
+    out: gen/js
